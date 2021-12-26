@@ -1,0 +1,19 @@
+{
+    "extends": "airbnb",
+    "rules": {
+      "no-console": "off",
+      "comma-dangle": "off",
+      "quotes": "off",
+      "react/prop-types": 0,
+      "arrow-body-style": 0,
+      "space-before-function-paren": 0,
+      "array-bracket-spacing": "off",
+      "indent": "on",
+      "react/prefer-stateless-function": "off",
+      "space-before-blocks": "never"
+    },
+    "env": {
+      "browser": true
+    },
+    "parser": "babel-eslint"
+  }
