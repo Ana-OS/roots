@@ -1,22 +1,60 @@
+import { useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 import useForm from '../lib/useForm';
+import DisplayError from './ErrorMessage';
 import Form from './styles/Form';
+
+
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION( # we need to name the mutation se we can use variables
+    # Which variables are getting passed in? And What types are they
+    $name: String! # the bang means that it is required
+    $description: String!
+    $price: Int!
+    $image: Upload
+  ) {
+    createProduct(
+      data: { #here we create data
+        name: $name
+        description: $description
+        price: $price
+        status: "AVAILABLE"
+        photo: { create: { image: $image, altText: $name } }
+      }
+    ) { # here we list what we want it to return
+      id
+      price
+      description
+      name
+    }
+  }
+`;
 
 export default function CreateProduct() {
     // hooking form to state
     // beacuse useForm returns an object with inouts, handleChange etc we can destructure it
-  const { inputs, handleChange, clearForm, resetForm } = useForm({
-    name: 'Nice Plant',
-    price: 34234,
-    description: 'This is the best palnt!',
-  });
+  const { inputs, handleChange, clearForm, resetForm } = useForm();
+    // useMutation it's what creates the new product with our form   
+    // useMutation returns an obj that we destructure
+  const [createProduct, { loading, error, data }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
+    {
+      variables: inputs,
+    }
+  );
+
   return (
     <Form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
         e.preventDefault();
         console.log(inputs);
+        // submit inout fields to backkend
+        await createProduct();
+        clearForm();
         }}
     >
-        <fieldset>
+        <DisplayError error={error}/>
+        <fieldset disabled={loading} aria-busy={loading}>
             <label htmlFor="image">
                 Image
                 <input
