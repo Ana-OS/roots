@@ -1,10 +1,12 @@
 import useForm from '../lib/useForm';
 
 export default function CreateProduct() {
+    // hooking form to state
+    // beacuse useForm returns an object with inouts, handleChange etc we can destructure it
   const { inputs, handleChange, clearForm, resetForm } = useForm({
-    name: 'Nice Shoes',
+    name: 'Nice Plant',
     price: 34234,
-    description: 'These are the best shoes!',
+    description: 'This is the best palnt!',
   });
   return (
     <form>

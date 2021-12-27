@@ -1,7 +1,10 @@
+import CreateProduct from "../components/CreateProduct";
 
 
 export default function SellPage() {
   return (
-    <p>sell pageee</p>
+    <div>
+      <CreateProduct/>
+    </div>
   );
 }
