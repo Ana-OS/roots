@@ -9,15 +9,15 @@ const Item = styled.div`
   flex-direction: column;
   img {
     width: 100%;
-    height: 400px;
+    height: 500px;
     object-fit: cover;
   }
   p {
     line-height: 2;
-    font-weight: 300;
+    font-weight: normal;
     flex-grow: 1;
     padding: 0 3rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .buttonList {
     display: grid;
