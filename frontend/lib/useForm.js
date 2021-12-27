@@ -26,6 +26,7 @@ export default function useForm(initial = {}) {
     }
     //  if it's files than we make it an array
     if (type === 'file') {
+        // destructure the first item in files and put it in value
       [value] = e.target.files;
     }
     setInputs({
