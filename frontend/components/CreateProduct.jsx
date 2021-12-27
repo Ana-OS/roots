@@ -2,8 +2,8 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
+import { ALL_PRODUCTS_QUERY } from './Products';
 import Form from './styles/Form';
-
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION( # we need to name the mutation se we can use variables
@@ -40,6 +40,8 @@ export default function CreateProduct() {
     CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
+    //   refetch the querie of all products that we defined in Products.jsx
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
   );
 
