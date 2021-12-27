@@ -24,12 +24,14 @@ function createClient({ headers, initialState }) {
       createUploadLink({
         uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
+          // credentials is "use cookies"
           credentials: 'include',
         },
-        // pass the headers along from this request. This enables SSR with logged in state
+        // pass the headers along from this request. This enables SSR with logged in state. So server side know user is looged in
         headers,
       }),
     ]),
+    // cache in browser memory
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
