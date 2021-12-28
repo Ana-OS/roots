@@ -4,8 +4,9 @@ export default function useForm(initial = {}) {
   // create a state object for our inputs
 //   useState (from React) it's what connects the form inouts to the state
   const [inputs, setInputs] = useState(initial);
+  // between the time our initial state goes from nothing (while its loading)to the time it has the values from the object we need to kep those
   const initialValues = Object.values(initial).join('');
-
+  console.log(initialValues)
   useEffect(() => {
     // This function runs when the things we are watching change
     setInputs(initial);
