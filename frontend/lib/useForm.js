@@ -11,11 +11,7 @@ export default function useForm(initial = {}) {
     setInputs(initial);
   }, [initialValues]);
 
-  // {
-  //   name: 'wes',
-  //   description: 'nice shoes',
-  //   price: 1000
-  // }
+  
 
   function handleChange(e) {
     let { value, name, type } = e.target;

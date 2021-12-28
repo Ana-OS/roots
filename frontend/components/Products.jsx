@@ -2,6 +2,8 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Product from './Product';
+import Head from 'next/head';
+
 
 // this import graphql tag that return a string in to a proper query
 const ALL_PRODUCTS_QUERY = gql`
@@ -37,6 +39,9 @@ export default function Products() {
   if (error) return <p>Error: {error.message}</p>;
   return (
     <div>
+      <Head>
+        <title>Roots</title>
+      </Head>
       <ProductsListStyles>
         {data.allProducts.map((product) => (
           <Product key={product.id} product={product} />

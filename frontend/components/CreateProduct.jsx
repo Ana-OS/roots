@@ -4,6 +4,8 @@ import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import { ALL_PRODUCTS_QUERY } from './Products';
 import Form from './styles/Form';
+import Head from 'next/head';
+import Router from 'next/router';
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION( # we need to name the mutation se we can use variables
@@ -46,13 +48,21 @@ export default function CreateProduct() {
   );
 
   return (
+      <>
+    <Head>
+        <title>Roots | Sell</title>
+    </Head>
     <Form
         onSubmit={async (e) => {
-        e.preventDefault();
-        console.log(inputs);
-        // submit inout fields to backkend
-        await createProduct();
-        clearForm();
+            e.preventDefault();
+            console.log(inputs);
+            // submit inout fields to backkend
+            const res = await createProduct();
+            clearForm();
+            // go to the new product page
+            Router.push({
+                pathname: `/product/${res.data.createProduct.id}`
+            })
         }}
     >
         <DisplayError error={error}/>
@@ -103,5 +113,6 @@ export default function CreateProduct() {
             <button type="submit">Add Product</button>
         </fieldset>
     </Form>
+    </>
   );
 }

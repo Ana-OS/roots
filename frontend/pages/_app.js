@@ -31,13 +31,13 @@ function MyApp({ Component, pageProps, apollo }) {
 }
 
 // this is a next function. if any of the pages have inititial props than just use them. ctx = context
-MyApp.getInititalProps = async function({Component, ctx}){
-  let pageProps = {}
-  if(Component.getInititalProps){
-    pageProps = await Component.getInititalProps(ctx)
+MyApp.getInitialProps = async function({ Component, ctx }) {
+  let pageProps = {};
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
   }
-  // get any query varaibles available at a page level
-  pageProps.query = ctz.query;
+  // get any query variables available at a page level
+  pageProps.query = ctx.query;
   
   return { pageProps }
 
