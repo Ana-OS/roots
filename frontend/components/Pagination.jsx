@@ -6,15 +6,13 @@ import PaginationStyles from './styles/PaginationStyles';
 import DisplayError from './ErrorMessage';
 import { perPage } from '../config';
 
-const PAGINATION_QUERY = gql`
+export const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
-    #   _allProductsMeta is keystone meta query
     _allProductsMeta {
       count
     }
   }
 `;
-
 
 // funstion pagination takes as argument the actual page we're on
 export default function Pagination({ page }) {
