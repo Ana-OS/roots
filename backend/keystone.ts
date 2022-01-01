@@ -1,14 +1,18 @@
 import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
-import { User } from './schemas/User';
-import { Product } from './schemas/Product';
+import {
+  withItemData,
+  statelessSessions,
+} from '@keystone-next/keystone/session';
 import { ProductImage } from './schemas/ProductImage';
+import { Product } from './schemas/Product';
+import { User } from './schemas/User';
 import 'dotenv/config';
-import { withItemData, statelessSessions} from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
-  process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
+  process.env.DATABASE_URL;
 
 const sessionConfig = {
   maxAge: 60 * 60 * 24 * 360, // How long they stay signed in?
@@ -17,16 +21,20 @@ const sessionConfig = {
 
 
 const { withAuth } = createAuth({
-        listKey: 'User', //its the User that loggs in
-        identityField: 'email', //field we use to identofy the user
-        secretField: 'password',
-        // the first time the user authenticates with
-        initFirstItem: {
-        fields: ['name', 'email', 'password'],
-        // TODO: Add in inital roles here
+  listKey: 'User',
+  identityField: 'email',
+  secretField: 'password',
+  initFirstItem: {
+    fields: ['name', 'email', 'password'],
+    // TODO: Add in inital roles here
+  },
+  passwordResetLink: {
+    async sendToken(args) {
+      // send the email
+      await sendPasswordResetEmail(args.token, args.identity);
     },
+  },
 });
-
 
 
 export default withAuth(
@@ -45,6 +53,7 @@ export default withAuth(
       url: databaseURL,
       //Add data seeding
       async onConnect(keystone) {
+          console.log("conncted to database")
         //   check if we are running the specific command to seed th data
           if(process.argv.includes('--seed-data'))
             await insertSeedData(keystone);
