@@ -6,6 +6,7 @@ import {
 } from '@keystone-next/keystone/session';
 import { ProductImage } from './schemas/ProductImage';
 import { Product } from './schemas/Product';
+import { CartItem } from './schemas/CartItem';
 import { User } from './schemas/User';
 import 'dotenv/config';
 import { insertSeedData } from './seed-data';
@@ -63,7 +64,9 @@ export default withAuth(
       // Schema items go in here
       User,
       Product,
-      ProductImage
+      ProductImage,
+      CartItem
+
     }),
     ui: {
       // Show the UI only for people that are logged in
