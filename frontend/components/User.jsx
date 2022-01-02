@@ -4,10 +4,24 @@ export const CURRENT_USER_QUERY = gql`
   query {
     authenticatedItem { #keystone will authenticate anything if needed so its authItem
       ... on User {  # authItem returns a Union so we need to sepcify by ... on User return the id email ..
-        id
+               id
         email
         name
-        # TODO: Query the cart once we have it
+        cart {
+          id
+          quantity
+          product {
+            id
+            price
+            name
+            description
+            photo {
+              image {
+                publicUrlTransformed
+              }
+            }
+          }
+        }
       }
     }
   }

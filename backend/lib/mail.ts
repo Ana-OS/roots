@@ -55,4 +55,6 @@ export async function sendPasswordResetEmail(
       <a href="${process.env.FRONTEND_URL}/reset?token=${resetToken}">Click Here to reset</a>
     `),
   })) as MailResponse;
+  console.log("INFOOO")
+  console.log(info)
 }
