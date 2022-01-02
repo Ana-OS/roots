@@ -68,6 +68,7 @@ export default withAuth(
       CartItem
 
     }),
+    extendGraphqlSchema,
     ui: {
       // Show the UI only for people that are logged in
       isAccessAllowed: ({ session }) =>
