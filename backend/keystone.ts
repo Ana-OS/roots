@@ -4,13 +4,14 @@ import {
   withItemData,
   statelessSessions,
 } from '@keystone-next/keystone/session';
+import { CartItem } from './schemas/CartItem';
 import { ProductImage } from './schemas/ProductImage';
 import { Product } from './schemas/Product';
-import { CartItem } from './schemas/CartItem';
 import { User } from './schemas/User';
 import 'dotenv/config';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
+import { extendGraphqlSchema } from './mutations';
 
 const databaseURL =
   process.env.DATABASE_URL;
@@ -66,9 +67,8 @@ export default withAuth(
       Product,
       ProductImage,
       CartItem
-
     }),
-    extendGraphqlSchema,
+    extendGraphqlSchema ,
     ui: {
       // Show the UI only for people that are logged in
       isAccessAllowed: ({ session }) =>
