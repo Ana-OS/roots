@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Supreme = styled.h3`
   background: var(--red);
-  color: white;
+  color: black;
   display: inline-block;
   padding: 4px 5px;
   transform: skew(-3deg);

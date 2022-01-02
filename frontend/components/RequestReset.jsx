@@ -32,7 +32,7 @@ export default function RequestReset() {
     console.log(res);
     console.log({ data, loading, error });
     resetForm();
-    // Send the email and password to the graphqlAPI
+    // Send the email and password to the graphqlAPI§
   }
   return (
     <Form method="POST" onSubmit={handleSubmit}>

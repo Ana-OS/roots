@@ -24,7 +24,7 @@ export default function Pagination({ page }) {
   return (
     <PaginationStyles>
       <Head>
-        <title>Roots - Page {page} of ___</title>
+        <title>Roots - Page {page} of {pageCount}</title>
       </Head>
       <Link href={`/products/${page - 1}`}>
           {/* if page we're in is less or eauql to one than disable it */}
