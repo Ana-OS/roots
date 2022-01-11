@@ -5,6 +5,7 @@ import Supreme from './styles/Supreme';
 import formatMoney from '../lib/formatMoney';
 import { useUser } from './User';
 import RemoveFromCart from './RemoveFromCart';
+import {Checkout} from './Checkout';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import { useCart } from '../lib/cartState';
 
@@ -64,6 +65,7 @@ export default function Cart() {
         </ul>
         <footer>
           <p>{formatMoney(calcTotalPrice(me.cart))}</p>
+          <Checkout/>
         </footer>
       </CartStyles>
     );
